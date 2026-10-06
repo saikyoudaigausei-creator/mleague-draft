@@ -1,0 +1,1408 @@
+{
+ "season": "current",
+ "updated": "2026-10-06 14:08",
+ "teams": [
+  {
+   "key": "EARTHJETS",
+   "name": "EARTH JETS",
+   "color": "#00897b"
+  },
+  {
+   "key": "KADOKAWAサクラナイツ",
+   "name": "KADOKAWAサクラナイツ",
+   "color": "#ad1457"
+  },
+  {
+   "key": "U-NEXTPirates",
+   "name": "U-NEXT Pirates",
+   "color": "#1565c0"
+  },
+  {
+   "key": "渋谷ABEMAS",
+   "name": "渋谷ABEMAS",
+   "color": "#f9a825"
+  },
+  {
+   "key": "赤坂ドリブンズ",
+   "name": "赤坂ドリブンズ",
+   "color": "#2e7d32"
+  },
+  {
+   "key": "セガサミーフェニックス",
+   "name": "セガサミーフェニックス",
+   "color": "#ef6c00"
+  },
+  {
+   "key": "BEASTX",
+   "name": "BEAST X",
+   "color": "#37474f"
+  },
+  {
+   "key": "TEAMRAIDEN/雷電",
+   "name": "TEAM RAIDEN / 雷電",
+   "color": "#f06292"
+  },
+  {
+   "key": "KONAMI麻雀格闘倶楽部",
+   "name": "KONAMI 麻雀格闘倶楽部",
+   "color": "#6a1b9a"
+  },
+  {
+   "key": "EX風林火山",
+   "name": "EX風林火山",
+   "color": "#c62828"
+  }
+ ],
+ "players": {
+  "逢川恵夢": {
+   "team": "EARTHJETS",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2025/08/profile_aikawa_megumu-1.png"
+  },
+  "仲林圭": {
+   "team": "U-NEXTPirates",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2017/08/profile_nakabayashi_kei-3.png"
+  },
+  "日向藍子": {
+   "team": "渋谷ABEMAS",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/09/profile_hinata_aiko-3.png"
+  },
+  "滝沢和典": {
+   "team": "KONAMI麻雀格闘倶楽部",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_takizawa_kazunori-3.png"
+  },
+  "朝倉康心": {
+   "team": "U-NEXTPirates",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_asakura_koshin.png"
+  },
+  "松本吉弘": {
+   "team": "渋谷ABEMAS",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_matsumoto_yoshihiro-3.png"
+  },
+  "佐々木寿人": {
+   "team": "KONAMI麻雀格闘倶楽部",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_sasaki_hisato-3.png"
+  },
+  "三浦智博": {
+   "team": "EARTHJETS",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2025/08/profile_miura_tomohiro-1.png"
+  },
+  "尻無濱航": {
+   "team": "KADOKAWAサクラナイツ",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2017/08/profle_shirinashihama_wataru.png"
+  },
+  "醍醐大": {
+   "team": "セガサミーフェニックス",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2017/07/profile_daigo_hiroshi-2.png"
+  },
+  "二階堂亜樹": {
+   "team": "EX風林火山",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_nikaido_aki-3.png"
+  },
+  "鈴木たろう": {
+   "team": "赤坂ドリブンズ",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_suzuki_taro-3.png"
+  },
+  "茅森早香": {
+   "team": "セガサミーフェニックス",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_kayamori_sayaka-3.png"
+  },
+  "内川幸太郎": {
+   "team": "EX風林火山",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_uchikawa_kotaro-1.png"
+  },
+  "浅見真紀": {
+   "team": "赤坂ドリブンズ",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2017/07/profile_asami_maki-2.png"
+  },
+  "岡田紗佳": {
+   "team": "KADOKAWAサクラナイツ",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2019/09/profile_okada_sayaka-3.png"
+  },
+  "本田朋広": {
+   "team": "TEAMRAIDEN/雷電",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/08/profile_honda_tomohiro-3.png"
+  },
+  "HIRO柴田": {
+   "team": "EARTHJETS",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2025/08/profile_hiro_shibata-1.png"
+  },
+  "東城りお": {
+   "team": "BEASTX",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_tojyo_rio-1.png"
+  },
+  "渡辺太": {
+   "team": "赤坂ドリブンズ",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2016/07/profile_watanabe_futoshi-2.png"
+  },
+  "石井一馬": {
+   "team": "EARTHJETS",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2025/08/profle_ishi_kazuma-1.png"
+  },
+  "園田賢": {
+   "team": "赤坂ドリブンズ",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_sonoda_ken-3.png"
+  },
+  "鈴木大介": {
+   "team": "BEASTX",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2023/07/profile_suzuki_daisuke-2.png"
+  },
+  "萩原聖人": {
+   "team": "TEAMRAIDEN/雷電",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_hagiwara_masato-3.png"
+  },
+  "黒沢咲": {
+   "team": "TEAMRAIDEN/雷電",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_kurosawa_saki-3.png"
+  },
+  "瑞原明奈": {
+   "team": "U-NEXTPirates",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/09/profile_mizuhara_akina-3.png"
+  },
+  "堀慎吾": {
+   "team": "KADOKAWAサクラナイツ",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/09/profile_hori_shingo-3.png"
+  },
+  "鈴木優": {
+   "team": "U-NEXTPirates",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2017/08/profile_suzuki_yu-3.png"
+  },
+  "伊達朱里紗": {
+   "team": "KONAMI麻雀格闘倶楽部",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_date_arisa-3.png"
+  },
+  "白鳥翔": {
+   "team": "渋谷ABEMAS",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_shiratori_sho-3.png"
+  },
+  "阿久津翔太": {
+   "team": "KADOKAWAサクラナイツ",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2017/08/profile_akutsu_shota-1.png"
+  },
+  "中田花奈": {
+   "team": "BEASTX",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2023/07/profile_nakada_kana-2.png"
+  },
+  "多井隆晴": {
+   "team": "渋谷ABEMAS",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_oi_takaharu-3.png"
+  },
+  "下石戟": {
+   "team": "BEASTX",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2023/07/profile_shimoishi_geki-1.png"
+  },
+  "瀬戸熊直樹": {
+   "team": "TEAMRAIDEN/雷電",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_setokuma_naoki-3.png"
+  },
+  "佐野ひなこ": {
+   "team": "セガサミーフェニックス",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2015/08/profile_sano_hinako.png"
+  },
+  "永井孝典": {
+   "team": "EX風林火山",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_nagai_kosuke-1.png"
+  },
+  "勝又健志": {
+   "team": "EX風林火山",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_katsumata_kenji-3.png"
+  },
+  "竹内元太": {
+   "team": "セガサミーフェニックス",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2016/08/profile_takeuchi_genta-2.png"
+  },
+  "高宮まり": {
+   "team": "KONAMI麻雀格闘倶楽部",
+   "img": "https://m-league.jp/wp/wp-content/uploads/2018/10/profile_takamiya_mari-3.png"
+  }
+ },
+ "games": [
+  {
+   "date": "2026-09-14",
+   "match": 1,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "逢川恵夢",
+     "rank": 1,
+     "pt": 58.0
+    },
+    {
+     "player": "仲林圭",
+     "rank": 2,
+     "pt": 3.8
+    },
+    {
+     "player": "日向藍子",
+     "rank": 3,
+     "pt": -19.5
+    },
+    {
+     "player": "滝沢和典",
+     "rank": 4,
+     "pt": -42.3
+    }
+   ]
+  },
+  {
+   "date": "2026-09-14",
+   "match": 1,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "朝倉康心",
+     "rank": 1,
+     "pt": 54.7
+    },
+    {
+     "player": "松本吉弘",
+     "rank": 2,
+     "pt": 7.4
+    },
+    {
+     "player": "佐々木寿人",
+     "rank": 3,
+     "pt": -14.0
+    },
+    {
+     "player": "三浦智博",
+     "rank": 4,
+     "pt": -48.1
+    }
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "match": 2,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "尻無濱航",
+     "rank": 1,
+     "pt": 64.9
+    },
+    {
+     "player": "醍醐大",
+     "rank": 2,
+     "pt": 13.2
+    },
+    {
+     "player": "二階堂亜樹",
+     "rank": 3,
+     "pt": -22.9
+    },
+    {
+     "player": "鈴木たろう",
+     "rank": 4,
+     "pt": -55.2
+    }
+   ]
+  },
+  {
+   "date": "2026-09-15",
+   "match": 2,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "茅森早香",
+     "rank": 1,
+     "pt": 69.7
+    },
+    {
+     "player": "内川幸太郎",
+     "rank": 2,
+     "pt": 26.3
+    },
+    {
+     "player": "浅見真紀",
+     "rank": 3,
+     "pt": -14.2
+    },
+    {
+     "player": "岡田紗佳",
+     "rank": 4,
+     "pt": -81.8
+    }
+   ]
+  },
+  {
+   "date": "2026-09-17",
+   "match": 3,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "本田朋広",
+     "rank": 1,
+     "pt": 56.7
+    },
+    {
+     "player": "HIRO柴田",
+     "rank": 2,
+     "pt": 13.2
+    },
+    {
+     "player": "東城りお",
+     "rank": 3,
+     "pt": -14.1
+    },
+    {
+     "player": "渡辺太",
+     "rank": 4,
+     "pt": -55.8
+    }
+   ]
+  },
+  {
+   "date": "2026-09-17",
+   "match": 3,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "石井一馬",
+     "rank": 1,
+     "pt": 55.6
+    },
+    {
+     "player": "園田賢",
+     "rank": 2,
+     "pt": 15.5
+    },
+    {
+     "player": "鈴木大介",
+     "rank": 3,
+     "pt": -10.1
+    },
+    {
+     "player": "萩原聖人",
+     "rank": 4,
+     "pt": -61.0
+    }
+   ]
+  },
+  {
+   "date": "2026-09-18",
+   "match": 4,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "黒沢咲",
+     "rank": 1,
+     "pt": 62.5
+    },
+    {
+     "player": "尻無濱航",
+     "rank": 2,
+     "pt": 14.6
+    },
+    {
+     "player": "瑞原明奈",
+     "rank": 3,
+     "pt": -26.5
+    },
+    {
+     "player": "佐々木寿人",
+     "rank": 4,
+     "pt": -50.6
+    }
+   ]
+  },
+  {
+   "date": "2026-09-18",
+   "match": 4,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "堀慎吾",
+     "rank": 1,
+     "pt": 51.0
+    },
+    {
+     "player": "鈴木優",
+     "rank": 2,
+     "pt": 7.7
+    },
+    {
+     "player": "本田朋広",
+     "rank": 3,
+     "pt": -17.1
+    },
+    {
+     "player": "伊達朱里紗",
+     "rank": 4,
+     "pt": -41.6
+    }
+   ]
+  },
+  {
+   "date": "2026-09-21",
+   "match": 5,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "渡辺太",
+     "rank": 1,
+     "pt": 67.5
+    },
+    {
+     "player": "白鳥翔",
+     "rank": 2,
+     "pt": 10.6
+    },
+    {
+     "player": "阿久津翔太",
+     "rank": 3,
+     "pt": -15.2
+    },
+    {
+     "player": "中田花奈",
+     "rank": 4,
+     "pt": -62.9
+    }
+   ]
+  },
+  {
+   "date": "2026-09-21",
+   "match": 5,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "多井隆晴",
+     "rank": 1,
+     "pt": 70.9
+    },
+    {
+     "player": "下石戟",
+     "rank": 2,
+     "pt": 8.5
+    },
+    {
+     "player": "園田賢",
+     "rank": 3,
+     "pt": -24.7
+    },
+    {
+     "player": "堀慎吾",
+     "rank": 4,
+     "pt": -54.7
+    }
+   ]
+  },
+  {
+   "date": "2026-09-21",
+   "match": 6,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "瀬戸熊直樹",
+     "rank": 1,
+     "pt": 101.9
+    },
+    {
+     "player": "逢川恵夢",
+     "rank": 2,
+     "pt": -4.1
+    },
+    {
+     "player": "佐野ひなこ",
+     "rank": 3,
+     "pt": -30.5
+    },
+    {
+     "player": "永井孝典",
+     "rank": 4,
+     "pt": -67.3
+    }
+   ]
+  },
+  {
+   "date": "2026-09-21",
+   "match": 6,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "勝又健志",
+     "rank": 1,
+     "pt": 65.3
+    },
+    {
+     "player": "竹内元太",
+     "rank": 2,
+     "pt": 14.7
+    },
+    {
+     "player": "本田朋広",
+     "rank": 3,
+     "pt": -19.6
+    },
+    {
+     "player": "石井一馬",
+     "rank": 4,
+     "pt": -60.4
+    }
+   ]
+  },
+  {
+   "date": "2026-09-22",
+   "match": 7,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "岡田紗佳",
+     "rank": 1,
+     "pt": 60.8
+    },
+    {
+     "player": "内川幸太郎",
+     "rank": 2,
+     "pt": 14.1
+    },
+    {
+     "player": "日向藍子",
+     "rank": 3,
+     "pt": -27.0
+    },
+    {
+     "player": "萩原聖人",
+     "rank": 4,
+     "pt": -47.9
+    }
+   ]
+  },
+  {
+   "date": "2026-09-22",
+   "match": 7,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "松本吉弘",
+     "rank": 1,
+     "pt": 78.2
+    },
+    {
+     "player": "勝又健志",
+     "rank": 2,
+     "pt": 2.8
+    },
+    {
+     "player": "阿久津翔太",
+     "rank": 3,
+     "pt": -24.8
+    },
+    {
+     "player": "黒沢咲",
+     "rank": 4,
+     "pt": -56.2
+    }
+   ]
+  },
+  {
+   "date": "2026-09-22",
+   "match": 8,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "佐々木寿人",
+     "rank": 1,
+     "pt": 82.2
+    },
+    {
+     "player": "鈴木優",
+     "rank": 2,
+     "pt": -2.1
+    },
+    {
+     "player": "茅森早香",
+     "rank": 3,
+     "pt": -29.4
+    },
+    {
+     "player": "鈴木大介",
+     "rank": 4,
+     "pt": -50.7
+    }
+   ]
+  },
+  {
+   "date": "2026-09-22",
+   "match": 8,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "中田花奈",
+     "rank": 1,
+     "pt": 89.3
+    },
+    {
+     "player": "滝沢和典",
+     "rank": 2,
+     "pt": -1.8
+    },
+    {
+     "player": "仲林圭",
+     "rank": 3,
+     "pt": -27.3
+    },
+    {
+     "player": "佐野ひなこ",
+     "rank": 4,
+     "pt": -60.2
+    }
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "match": 9,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "東城りお",
+     "rank": 1,
+     "pt": 102.7
+    },
+    {
+     "player": "逢川恵夢",
+     "rank": 2,
+     "pt": -5.7
+    },
+    {
+     "player": "白鳥翔",
+     "rank": 3,
+     "pt": -35.9
+    },
+    {
+     "player": "醍醐大",
+     "rank": 4,
+     "pt": -61.1
+    }
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "match": 9,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "多井隆晴",
+     "rank": 1,
+     "pt": 101.6
+    },
+    {
+     "player": "鈴木大介",
+     "rank": 2,
+     "pt": 16.2
+    },
+    {
+     "player": "竹内元太",
+     "rank": 3,
+     "pt": -36.6
+    },
+    {
+     "player": "HIRO柴田",
+     "rank": 4,
+     "pt": -81.2
+    }
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "match": 10,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "佐々木寿人",
+     "rank": 1,
+     "pt": 62.7
+    },
+    {
+     "player": "瑞原明奈",
+     "rank": 2,
+     "pt": 15.2
+    },
+    {
+     "player": "鈴木たろう",
+     "rank": 3,
+     "pt": -17.5
+    },
+    {
+     "player": "永井孝典",
+     "rank": 4,
+     "pt": -60.4
+    }
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "match": 10,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "二階堂亜樹",
+     "rank": 1,
+     "pt": 61.9
+    },
+    {
+     "player": "仲林圭",
+     "rank": 2,
+     "pt": 10.8
+    },
+    {
+     "player": "園田賢",
+     "rank": 3,
+     "pt": -11.7
+    },
+    {
+     "player": "伊達朱里紗",
+     "rank": 4,
+     "pt": -61.0
+    }
+   ]
+  },
+  {
+   "date": "2026-09-25",
+   "match": 11,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "朝倉康心",
+     "rank": 1,
+     "pt": 74.0
+    },
+    {
+     "player": "浅見真紀",
+     "rank": 2,
+     "pt": -1.8
+    },
+    {
+     "player": "萩原聖人",
+     "rank": 3,
+     "pt": -25.1
+    },
+    {
+     "player": "日向藍子",
+     "rank": 4,
+     "pt": -47.1
+    }
+   ]
+  },
+  {
+   "date": "2026-09-25",
+   "match": 11,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "松本吉弘",
+     "rank": 1,
+     "pt": 53.2
+    },
+    {
+     "player": "仲林圭",
+     "rank": 2,
+     "pt": 5.5
+    },
+    {
+     "player": "瀬戸熊直樹",
+     "rank": 3,
+     "pt": -18.1
+    },
+    {
+     "player": "鈴木たろう",
+     "rank": 4,
+     "pt": -40.6
+    }
+   ]
+  },
+  {
+   "date": "2026-09-25",
+   "match": 12,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "堀慎吾",
+     "rank": 1,
+     "pt": 60.9
+    },
+    {
+     "player": "下石戟",
+     "rank": 2,
+     "pt": 5.9
+    },
+    {
+     "player": "逢川恵夢",
+     "rank": 3,
+     "pt": -16.6
+    },
+    {
+     "player": "内川幸太郎",
+     "rank": 4,
+     "pt": -50.2
+    }
+   ]
+  },
+  {
+   "date": "2026-09-25",
+   "match": 12,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "尻無濱航",
+     "rank": 1,
+     "pt": 57.7
+    },
+    {
+     "player": "勝又健志",
+     "rank": 2,
+     "pt": 9.5
+    },
+    {
+     "player": "石井一馬",
+     "rank": 3,
+     "pt": -23.4
+    },
+    {
+     "player": "中田花奈",
+     "rank": 4,
+     "pt": -43.8
+    }
+   ]
+  },
+  {
+   "date": "2026-09-28",
+   "match": 13,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "岡田紗佳",
+     "rank": 1,
+     "pt": 60.2
+    },
+    {
+     "player": "瑞原明奈",
+     "rank": 2,
+     "pt": 17.4
+    },
+    {
+     "player": "三浦智博",
+     "rank": 3,
+     "pt": -18.4
+    },
+    {
+     "player": "茅森早香",
+     "rank": 4,
+     "pt": -59.2
+    }
+   ]
+  },
+  {
+   "date": "2026-09-28",
+   "match": 13,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "佐野ひなこ",
+     "rank": 1,
+     "pt": 72.5
+    },
+    {
+     "player": "阿久津翔太",
+     "rank": 2,
+     "pt": 3.6
+    },
+    {
+     "player": "仲林圭",
+     "rank": 3,
+     "pt": -22.3
+    },
+    {
+     "player": "石井一馬",
+     "rank": 4,
+     "pt": -53.8
+    }
+   ]
+  },
+  {
+   "date": "2026-09-28",
+   "match": 14,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "滝沢和典",
+     "rank": 1,
+     "pt": 52.3
+    },
+    {
+     "player": "二階堂亜樹",
+     "rank": 2,
+     "pt": 4.5
+    },
+    {
+     "player": "東城りお",
+     "rank": 3,
+     "pt": -17.2
+    },
+    {
+     "player": "白鳥翔",
+     "rank": 4,
+     "pt": -39.6
+    }
+   ]
+  },
+  {
+   "date": "2026-09-28",
+   "match": 14,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "高宮まり",
+     "rank": 1,
+     "pt": 55.9
+    },
+    {
+     "player": "多井隆晴",
+     "rank": 2,
+     "pt": 11.0
+    },
+    {
+     "player": "中田花奈",
+     "rank": 3,
+     "pt": -21.2
+    },
+    {
+     "player": "勝又健志",
+     "rank": 4,
+     "pt": -45.7
+    }
+   ]
+  },
+  {
+   "date": "2026-09-29",
+   "match": 15,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "永井孝典",
+     "rank": 1,
+     "pt": 52.6
+    },
+    {
+     "player": "本田朋広",
+     "rank": 2,
+     "pt": 6.8
+    },
+    {
+     "player": "鈴木大介",
+     "rank": 3,
+     "pt": -14.3
+    },
+    {
+     "player": "鈴木優",
+     "rank": 4,
+     "pt": -45.1
+    }
+   ]
+  },
+  {
+   "date": "2026-09-29",
+   "match": 15,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "中田花奈",
+     "rank": 1,
+     "pt": 67.0
+    },
+    {
+     "player": "黒沢咲",
+     "rank": 2,
+     "pt": 4.2
+    },
+    {
+     "player": "二階堂亜樹",
+     "rank": 3,
+     "pt": -23.5
+    },
+    {
+     "player": "朝倉康心",
+     "rank": 4,
+     "pt": -47.7
+    }
+   ]
+  },
+  {
+   "date": "2026-09-29",
+   "match": 16,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "渡辺太",
+     "rank": 1,
+     "pt": 62.0
+    },
+    {
+     "player": "竹内元太",
+     "rank": 2,
+     "pt": 14.6
+    },
+    {
+     "player": "日向藍子",
+     "rank": 3,
+     "pt": -26.8
+    },
+    {
+     "player": "伊達朱里紗",
+     "rank": 4,
+     "pt": -49.8
+    }
+   ]
+  },
+  {
+   "date": "2026-09-29",
+   "match": 16,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "園田賢",
+     "rank": 1,
+     "pt": 78.3
+    },
+    {
+     "player": "高宮まり",
+     "rank": 2,
+     "pt": 19.1
+    },
+    {
+     "player": "竹内元太",
+     "rank": 3,
+     "pt": -30.5
+    },
+    {
+     "player": "松本吉弘",
+     "rank": 4,
+     "pt": -66.9
+    }
+   ]
+  },
+  {
+   "date": "2026-10-01",
+   "match": 17,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "渡辺太",
+     "rank": 1,
+     "pt": 67.7
+    },
+    {
+     "player": "三浦智博",
+     "rank": 2,
+     "pt": 11.2
+    },
+    {
+     "player": "竹内元太",
+     "rank": 3,
+     "pt": -24.6
+    },
+    {
+     "player": "佐々木寿人",
+     "rank": 4,
+     "pt": -54.3
+    }
+   ]
+  },
+  {
+   "date": "2026-10-01",
+   "match": 17,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "滝沢和典",
+     "rank": 1,
+     "pt": 79.5
+    },
+    {
+     "player": "鈴木たろう",
+     "rank": 2,
+     "pt": -0.9
+    },
+    {
+     "player": "醍醐大",
+     "rank": 3,
+     "pt": -25.7
+    },
+    {
+     "player": "石井一馬",
+     "rank": 4,
+     "pt": -52.9
+    }
+   ]
+  },
+  {
+   "date": "2026-10-01",
+   "match": 18,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "阿久津翔太",
+     "rank": 1,
+     "pt": 82.7
+    },
+    {
+     "player": "永井孝典",
+     "rank": 2,
+     "pt": 14.5
+    },
+    {
+     "player": "朝倉康心",
+     "rank": 3,
+     "pt": -27.0
+    },
+    {
+     "player": "萩原聖人",
+     "rank": 4,
+     "pt": -70.2
+    }
+   ]
+  },
+  {
+   "date": "2026-10-01",
+   "match": 18,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "堀慎吾",
+     "rank": 1,
+     "pt": 57.1
+    },
+    {
+     "player": "内川幸太郎",
+     "rank": 2,
+     "pt": 11.3
+    },
+    {
+     "player": "本田朋広",
+     "rank": 3,
+     "pt": -15.6
+    },
+    {
+     "player": "鈴木優",
+     "rank": 4,
+     "pt": -52.8
+    }
+   ]
+  },
+  {
+   "date": "2026-10-02",
+   "match": 19,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "伊達朱里紗",
+     "rank": 1,
+     "pt": 66.2
+    },
+    {
+     "player": "石井一馬",
+     "rank": 2,
+     "pt": 5.4
+    },
+    {
+     "player": "下石戟",
+     "rank": 3,
+     "pt": -23.0
+    },
+    {
+     "player": "黒沢咲",
+     "rank": 4,
+     "pt": -48.6
+    }
+   ]
+  },
+  {
+   "date": "2026-10-02",
+   "match": 19,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "瀬戸熊直樹",
+     "rank": 1,
+     "pt": 61.8
+    },
+    {
+     "player": "高宮まり",
+     "rank": 2,
+     "pt": 13.0
+    },
+    {
+     "player": "東城りお",
+     "rank": 3,
+     "pt": -27.3
+    },
+    {
+     "player": "HIRO柴田",
+     "rank": 4,
+     "pt": -47.5
+    }
+   ]
+  },
+  {
+   "date": "2026-10-02",
+   "match": 20,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "浅見真紀",
+     "rank": 1,
+     "pt": 64.7
+    },
+    {
+     "player": "竹内元太",
+     "rank": 2,
+     "pt": 7.4
+    },
+    {
+     "player": "日向藍子",
+     "rank": 3,
+     "pt": -14.6
+    },
+    {
+     "player": "堀慎吾",
+     "rank": 4,
+     "pt": -57.5
+    }
+   ]
+  },
+  {
+   "date": "2026-10-02",
+   "match": 20,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "尻無濱航",
+     "rank": 1,
+     "pt": 59.6
+    },
+    {
+     "player": "茅森早香",
+     "rank": 2,
+     "pt": 12.9
+    },
+    {
+     "player": "多井隆晴",
+     "rank": 3,
+     "pt": -17.2
+    },
+    {
+     "player": "園田賢",
+     "rank": 4,
+     "pt": -55.3
+    }
+   ]
+  },
+  {
+   "date": "2026-10-05",
+   "match": 21,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "日向藍子",
+     "rank": 1,
+     "pt": 63.6
+    },
+    {
+     "player": "滝沢和典",
+     "rank": 2,
+     "pt": 4.9
+    },
+    {
+     "player": "永井孝典",
+     "rank": 3,
+     "pt": -17.3
+    },
+    {
+     "player": "三浦智博",
+     "rank": 4,
+     "pt": -51.2
+    }
+   ]
+  },
+  {
+   "date": "2026-10-05",
+   "match": 21,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "佐々木寿人",
+     "rank": 1,
+     "pt": 63.4
+    },
+    {
+     "player": "白鳥翔",
+     "rank": 2,
+     "pt": 19.3
+    },
+    {
+     "player": "逢川恵夢",
+     "rank": 3,
+     "pt": -24.7
+    },
+    {
+     "player": "二階堂亜樹",
+     "rank": 4,
+     "pt": -58.0
+    }
+   ]
+  },
+  {
+   "date": "2026-10-05",
+   "match": 22,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "渡辺太",
+     "rank": 1,
+     "pt": 64.6
+    },
+    {
+     "player": "佐野ひなこ",
+     "rank": 2,
+     "pt": 14.6
+    },
+    {
+     "player": "瑞原明奈",
+     "rank": 3,
+     "pt": -17.6
+    },
+    {
+     "player": "鈴木大介",
+     "rank": 4,
+     "pt": -61.6
+    }
+   ]
+  },
+  {
+   "date": "2026-10-05",
+   "match": 22,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "仲林圭",
+     "rank": 1,
+     "pt": 55.4
+    },
+    {
+     "player": "中田花奈",
+     "rank": 2,
+     "pt": 4.8
+    },
+    {
+     "player": "茅森早香",
+     "rank": 3,
+     "pt": -18.5
+    },
+    {
+     "player": "園田賢",
+     "rank": 4,
+     "pt": -41.7
+    }
+   ]
+  }
+ ]
+}

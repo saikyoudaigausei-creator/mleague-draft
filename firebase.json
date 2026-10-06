@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "site": "mleague-nakama",
+    "public": "docs",
+    "ignore": ["firebase.json", "**/.*"],
+    "headers": [
+      { "source": "**", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }
+    ]
+  }
+}

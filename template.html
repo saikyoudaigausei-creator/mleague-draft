@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M.ドラフト</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f3f2ee;
+  --surface: #fcfcfb;
+  --surface-2: #f0efea;
+  --line: #e3e1d9;
+  --grid: #ecebe5;
+  --text: #0b0b0b;
+  --text-2: #52514e;
+  --muted: #8a8984;
+  --felt: #0f5132;
+  --felt-2: #146c43;
+  --on-felt: #ffffff;
+  --on-felt-2: #cfe6da;
+  --accent: #146c43;
+  --pos: #1a7f4b;
+  --neg: #c4362f;
+  --gold: #c99a06; --silver: #8d96a0; --bronze: #b0703a;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+  --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111110; --surface: #1a1a19; --surface-2: #222220; --line: #2e2e2c; --grid: #262624;
+    --text: #ffffff; --text-2: #c3c2b7; --muted: #8d8c86;
+    --felt: #0c3b26; --felt-2: #10492f; --on-felt-2: #a9cbb9; --accent: #3fbf7f;
+    --pos: #3fbf7f; --neg: #ef6b63;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111110; --surface: #1a1a19; --surface-2: #222220; --line: #2e2e2c; --grid: #262624;
+  --text: #ffffff; --text-2: #c3c2b7; --muted: #8d8c86;
+  --felt: #0c3b26; --felt-2: #10492f; --on-felt-2: #a9cbb9; --accent: #3fbf7f;
+  --pos: #3fbf7f; --neg: #ef6b63;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+  --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  font-size: 15px; line-height: 1.5;
+}
+.num { font-variant-numeric: tabular-nums; }
+.pos { color: var(--pos); } .neg { color: var(--neg); }
+
+/* ---- hero ---- */
+.hero {
+  background: linear-gradient(160deg, var(--felt-2), var(--felt));
+  color: var(--on-felt); padding: 20px 16px 12px;
+}
+.hero-in { max-width: 920px; margin: 0 auto; }
+.hero h1 { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: .08em; font-style: italic; }
+.hero h1 .dot-g { color: var(--gold); }
+.hero .meta { color: var(--on-felt-2); font-size: 13px; margin-top: 4px; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 16px 16px 48px; }
+.tabs {
+  position: sticky; top: 0; z-index: 5; background: var(--felt);
+  padding: 0 16px; box-shadow: 0 1px 0 rgba(0,0,0,.08);
+}
+.tabs-in { max-width: 920px; margin: 0 auto; display: flex; gap: 2px; overflow-x: auto; }
+.tabs button {
+  flex: none; background: none; border: 0; font: inherit; font-size: 14px; cursor: pointer;
+  color: var(--on-felt-2); padding: 11px 14px; border-bottom: 3px solid transparent;
+}
+.tabs button[aria-selected="true"] { color: var(--on-felt); font-weight: 700; border-color: var(--gold); }
+section[hidden] { display: none; }
+h2 { font-size: 16px; margin: 0 0 10px; display: flex; align-items: baseline; gap: 8px; }
+h2 small { font-size: 12px; color: var(--muted); font-weight: 400; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+
+/* ---- standings ---- */
+.standings { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.st { padding: 14px; position: relative; overflow: hidden; }
+.st::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--c); }
+.st-top { display: flex; align-items: center; gap: 10px; }
+.rank {
+  width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
+  font-weight: 700; background: var(--surface-2); color: var(--text-2); flex: none;
+}
+.rank.r1 { background: var(--gold); color: #fff; }
+.rank.r2 { background: var(--silver); color: #fff; }
+.rank.r3 { background: var(--bronze); color: #fff; }
+.st-name { font-weight: 700; font-size: 17px; }
+.move { font-size: 11px; margin-left: 4px; }
+.st-pt { margin-left: auto; text-align: right; }
+.st-pt b { font-size: 22px; display: block; line-height: 1.1; }
+.st-pt span { font-size: 12px; }
+.picks { margin-top: 10px; display: grid; gap: 4px; }
+.pick { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.av {
+  width: 26px; height: 26px; border-radius: 50%; object-fit: cover; object-position: top;
+  background: var(--surface-2); flex: none;
+}
+.pick .nm { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pick .tm { color: var(--muted); font-size: 11px; margin-left: 4px; }
+.pick .pt { width: 58px; text-align: right; }
+.pick .lt { width: 52px; text-align: right; font-size: 12px; }
+.pick .none { color: var(--muted); }
+.pick-head { display: flex; justify-content: flex-end; gap: 8px; font-size: 11px; color: var(--muted); margin-top: 10px; }
+.pick-head span:first-child { width: 52px; text-align: right; }
+.pick-head span:last-child { width: 58px; text-align: right; }
+.pick-head + .picks { margin-top: 2px; }
+.bar { height: 4px; border-radius: 2px; background: var(--surface-2); margin-top: 10px; overflow: hidden; display: flex; }
+
+/* ---- controls ---- */
+.controls { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.seg button {
+  background: none; border: 0; padding: 6px 12px; font: inherit; font-size: 13px;
+  color: var(--text-2); cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.chartcard { padding: 12px; }
+.chartbox { position: relative; height: 320px; }
+
+/* ---- last day ---- */
+.games { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.game { padding: 12px 14px; }
+.game h3 { margin: 0 0 6px; font-size: 13px; color: var(--text-2); font-weight: 500; }
+.gr { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 14px; }
+.gr .rk { width: 30px; flex: none; color: var(--muted); font-size: 12px; }
+.gr .nm { flex: 1; }
+.owner {
+  font-size: 11px; padding: 1px 7px; border-radius: 999px; color: #fff; background: var(--c);
+  white-space: nowrap;
+}
+.gr .pt { width: 64px; text-align: right; }
+.gr.free { color: var(--muted); }
+
+/* ---- players table ---- */
+.tablecard { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+th { font-size: 12px; color: var(--text-2); font-weight: 500; }
+td.n, th.n { text-align: right; }
+th.sortable { cursor: pointer; }
+th.sortable[aria-sort] { color: var(--text); }
+.pl { display: flex; align-items: center; gap: 8px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; background: var(--c); margin-right: 5px; }
+.note { color: var(--muted); font-size: 12px; }
+@media (max-width: 560px) {
+  .chartbox { height: 260px; }
+  .hide-sm { display: none; }
+  th, td { padding: 8px 6px; }
+}
+</style>
+</head>
+<body>
+<div class="hero"><div class="hero-in">
+  <h1 id="title"></h1>
+  <div class="meta" id="meta"></div>
+</div></div>
+<nav class="tabs" role="tablist"><div class="tabs-in">
+  <button role="tab" data-tab="standings" aria-selected="true">順位</button>
+  <button role="tab" data-tab="trend" aria-selected="false">推移</button>
+  <button role="tab" data-tab="last" aria-selected="false">前回の試合</button>
+  <button role="tab" data-tab="players" aria-selected="false">選手成績</button>
+</div></nav>
+
+<div class="wrap">
+  <section id="p-standings">
+    <div class="standings" id="standings"></div>
+  </section>
+
+  <section id="p-trend" hidden>
+    <div class="controls">
+      <div class="seg" id="range">
+        <button data-v="14" aria-pressed="false">2週</button>
+        <button data-v="30" aria-pressed="false">1か月</button>
+        <button data-v="0" aria-pressed="true">全期間</button>
+      </div>
+    </div>
+    <div class="card chartcard"><div class="chartbox"><canvas id="chart"></canvas></div></div>
+  </section>
+
+  <section id="p-last" hidden>
+    <h2 id="lastTitle"></h2>
+    <div class="games" id="games"></div>
+  </section>
+
+  <section id="p-players" hidden>
+    <h2>指名選手の成績 <small>見出しで並べ替え</small></h2>
+    <div class="card tablecard"><table id="players"></table></div>
+  </section>
+
+  <div class="note">データ: M.LEAGUE公式サイトの試合結果を集計。グラフの日付は試合日のみ。</div>
+</div>
+
+<script>
+const EMBEDDED = /*__DATA__*/null;
+const LEAGUE = /*__LEAGUE__*/null;
+
+// GitHub Actions が毎晩更新する data.json を読みに行き、埋め込みデータより新しければそちらを使う
+async function loadData() {
+  if (!LEAGUE.data_url) return EMBEDDED;
+  try {
+    const ctl = new AbortController();
+    setTimeout(() => ctl.abort(), 3000);
+    const r = await fetch(`${LEAGUE.data_url}?t=${Math.floor(Date.now() / 300000)}`, { signal: ctl.signal });
+    if (r.ok) {
+      const d = await r.json();
+      if (d.updated >= EMBEDDED.updated) return d;
+    }
+  } catch (e) {}
+  return EMBEDDED;
+}
+
+loadData().then(DATA => {
+
+const norm = s => s.replace(/\s+/g, "");
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const fmt = v => (Math.round(v * 10) / 10).toFixed(1);
+const sgn = v => (v > 0 ? "+" : v < 0 ? "▲" : "±") + fmt(Math.abs(v));
+const cls = v => v > 0 ? "pos" : v < 0 ? "neg" : "";
+const label = d => { const [, m, dd] = d.split("-"); return `${+m}/${+dd}`; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+// ---- 集計 ----
+const days = [...new Set(DATA.games.map(g => g.date))].sort();
+const N = days.length;
+const lastDay = days[N - 1];
+const zero = () => Array(N).fill(0);
+const teamName = k => (DATA.teams.find(t => t.key === k) || { name: "" }).name;
+const shortTeam = k => teamName(k).replace(/^(KADOKAWA|KONAMI|U-NEXT|TEAM RAIDEN \/ |セガサミー)\s*/, "");
+
+const perDay = {}, stats = {};
+for (const g of DATA.games) {
+  const i = days.indexOf(g.date);
+  for (const r of g.results) {
+    (perDay[r.player] ||= zero())[i] += r.pt;
+    const s = (stats[r.player] ||= { n: 0, ranks: [0, 0, 0, 0] });
+    s.n++; if (r.rank) s.ranks[r.rank - 1]++;
+  }
+}
+const daily = p => perDay[norm(p)] || zero();
+const cumsum = a => { let s = 0; return a.map(x => (s += x)); };
+const total = a => a.reduce((x, y) => x + y, 0);
+
+const SV = ["--s1", "--s2", "--s3", "--s4", "--s5", "--s6", "--s7", "--s8"];
+const members = LEAGUE.members.map((m, i) => {
+  const picks = m.players.map(norm);
+  const d = picks.reduce((a, p) => a.map((x, j) => x + daily(p)[j]), zero());
+  return { ...m, i, picks, daily: d, cum: cumsum(d), sum: total(d), last: d[N - 1] || 0, cvar: SV[i % 8] };
+});
+const ownerOf = {};
+members.forEach(m => m.picks.forEach(p => (ownerOf[p] = m)));
+
+// 各日終了時点の順位
+const rankAt = j => {
+  const order = [...members].sort((a, b) => b.cum[j] - a.cum[j]);
+  return Object.fromEntries(order.map((m, k) => [m.name, k + 1]));
+};
+const rankSeries = Object.fromEntries(members.map(m => [m.name, []]));
+for (let j = 0; j < N; j++) { const r = rankAt(j); for (const m of members) rankSeries[m.name].push(r[m.name]); }
+
+// ---- ヘッダー ----
+const appName = LEAGUE.name || "M.ドラフト";
+document.title = appName;
+document.getElementById("title").innerHTML = esc(appName).replace(".", '<span class="dot-g">.</span>');
+document.getElementById("meta").textContent =
+  `${label(lastDay)} 終了時点 ・ ${N}日 ${DATA.games.length}試合 ・ 更新 ${DATA.updated}`;
+
+// ---- 順位カード ----
+function renderStandings() {
+  const order = [...members].sort((a, b) => b.sum - a.sum);
+  const maxAbs = Math.max(1, ...members.flatMap(m => m.picks.map(p => Math.abs(total(daily(p))))));
+  document.getElementById("standings").innerHTML = order.map((m, k) => {
+    const prev = N > 1 ? rankSeries[m.name][N - 2] : k + 1;
+    const mv = prev - (k + 1);
+    const move = mv > 0 ? `<span class="move pos">▲${mv}</span>` : mv < 0 ? `<span class="move neg">▼${-mv}</span>` : "";
+    const picks = [...m.picks].sort((a, b) => total(daily(b)) - total(daily(a))).map(p => {
+      const pl = DATA.players[p] || {}, t = total(daily(p)), l = daily(p)[N - 1];
+      return `<div class="pick">
+        <img class="av" src="${esc(pl.img || "")}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">
+        <span class="nm">${esc(p)}<span class="tm">${esc(shortTeam(pl.team))}</span></span>
+        <span class="lt num ${l ? cls(l) : "none"}">${l ? sgn(l) : "—"}</span>
+        <span class="pt num ${cls(t)}">${fmt(t)}</span>
+      </div>`;
+    }).join("");
+    return `<div class="card st" style="--c:var(${m.cvar})">
+      <div class="st-top">
+        <div class="rank r${k + 1}">${k + 1}</div>
+        <div><span class="st-name">${esc(m.name)}</span>${move}</div>
+        <div class="st-pt num"><b class="${cls(m.sum)}">${fmt(m.sum)}</b>
+          <span class="${cls(m.last)}">前回 ${m.last ? sgn(m.last) : "出番なし"}</span></div>
+      </div>
+      <div class="pick-head"><span>前回</span><span>合計</span></div>
+      <div class="picks">${picks}</div>
+    </div>`;
+  }).join("");
+}
+
+// ---- グラフ ----
+const state = { range: 0 };
+let chart;
+function renderChart() {
+  const from = state.range ? Math.max(0, N - state.range) : 0;
+  const withStart = from === 0;
+  const labels = days.slice(from).map(label);
+  if (withStart) labels.unshift("開幕");
+  const datasets = members.map(m => {
+    const c = css(m.cvar);
+    let data = m.cum.slice(from).map(v => Math.round(v * 10) / 10);
+    let delta = m.daily.slice(from);
+    if (withStart) { data = [0, ...data]; delta = [null, ...delta]; }
+    return {
+      label: m.name, data, delta, borderColor: c, backgroundColor: c,
+      borderWidth: 2, pointRadius: 0, pointHoverRadius: 5,
+      stepped: false, tension: 0, borderRadius: 4, borderSkipped: false,
+    };
+  });
+  const grid = css("--grid"), muted = css("--muted"), text2 = css("--text-2");
+  if (chart) chart.destroy();
+  chart = new Chart(document.getElementById("chart"), {
+    type: "line",
+    data: { labels, datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false, animation: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { position: "bottom", labels: { color: text2, boxWidth: 8, boxHeight: 8, usePointStyle: true, padding: 14 } },
+        tooltip: {
+          itemSort: (a, b) => b.parsed.y - a.parsed.y,
+          callbacks: {
+            label: c => {
+              const d = c.dataset.delta[c.dataIndex];
+              const dd = d ? ` (${d > 0 ? "+" : "▲"}${fmt(Math.abs(d))})` : d === 0 ? " (出番なし)" : "";
+              return ` ${c.dataset.label}  ${fmt(c.parsed.y)}${dd}`;
+            },
+          },
+        },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: muted, maxRotation: 0, autoSkipPadding: 12 } },
+        y: { grid: { color: c => c.tick.value === 0 ? muted : grid }, ticks: { color: muted }, border: { display: false } },
+      },
+    },
+  });
+}
+
+// ---- 前回の試合 ----
+function renderLastDay() {
+  const gs = DATA.games.filter(g => g.date === lastDay);
+  const matches = [...new Set(gs.map(g => g.match))];
+  const tag = g => matches.length > 1 ? `${matches.indexOf(g.match) + 1}組目・` : "";
+  document.getElementById("lastTitle").innerHTML = `前回の試合 <small>${label(lastDay)}</small>`;
+  document.getElementById("games").innerHTML = gs.map(g => `
+    <div class="card game"><h3>${tag(g)}${esc(g.no)}</h3>
+      ${g.results.map(r => {
+        const o = ownerOf[r.player];
+        return `<div class="gr ${o ? "" : "free"}">
+          <span class="rk">${r.rank}着</span>
+          <span class="nm">${esc(r.player)}</span>
+          ${o ? `<span class="owner" style="--c:var(${o.cvar})">${esc(o.name)}</span>` : ""}
+          <span class="pt num ${o ? cls(r.pt) : ""}">${sgn(r.pt)}</span>
+        </div>`;
+      }).join("")}
+    </div>`).join("");
+}
+
+// ---- 指名選手テーブル ----
+const sort = { key: "sum", dir: -1 };
+function renderPlayers() {
+  const rows = members.flatMap(m => m.picks.map(p => {
+    const s = stats[p] || { n: 0, ranks: [0, 0, 0, 0] };
+    const avg = s.n ? s.ranks.reduce((a, c, k) => a + c * (k + 1), 0) / s.n : null;
+    return { p, m, team: shortTeam((DATA.players[p] || {}).team), sum: total(daily(p)), n: s.n,
+             avg, top: s.ranks[0], las: s.ranks[3], last: daily(p)[N - 1], img: (DATA.players[p] || {}).img };
+  }));
+  rows.sort((a, b) => {
+    const x = a[sort.key] ?? 99, y = b[sort.key] ?? 99;
+    return typeof x === "string" ? sort.dir * x.localeCompare(y, "ja") : sort.dir * (x - y);
+  });
+  const cols = [
+    ["p", "選手", ""], ["owner", "指名", ""], ["sum", "合計pt", "n"], ["n", "試合", "n hide-sm"],
+    ["avg", "平均着順", "n"], ["top", "トップ", "n hide-sm"], ["las", "ラス", "n hide-sm"],
+  ];
+  const head = cols.map(([k, t, c]) => {
+    const s = k === "owner" ? "" : ` sortable" data-k="${k}`;
+    const aria = sort.key === k ? ` aria-sort="${sort.dir < 0 ? "descending" : "ascending"}"` : "";
+    const arrow = sort.key === k ? (sort.dir < 0 ? " ↓" : " ↑") : "";
+    return `<th class="${c}${s}"${aria}>${t}${arrow}</th>`;
+  }).join("");
+  document.getElementById("players").innerHTML = `<tr>${head}</tr>` + rows.map(r => `
+    <tr>
+      <td><div class="pl"><img class="av" src="${esc(r.img || "")}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">
+        <span>${esc(r.p)}<span class="tm" style="color:var(--muted);font-size:11px;margin-left:4px">${esc(r.team)}</span></span></div></td>
+      <td><span class="dot" style="--c:var(${r.m.cvar})"></span>${esc(r.m.name)}</td>
+      <td class="n num ${cls(r.sum)}"><b>${fmt(r.sum)}</b></td>
+      <td class="n num hide-sm">${r.n}</td>
+      <td class="n num">${r.avg ? r.avg.toFixed(2) : "-"}</td>
+      <td class="n num hide-sm">${r.top}</td>
+      <td class="n num hide-sm">${r.las}</td>
+    </tr>`).join("");
+  document.querySelectorAll("#players th.sortable").forEach(th => th.onclick = () => {
+    const k = th.dataset.k;
+    if (sort.key === k) sort.dir *= -1;
+    else { sort.key = k; sort.dir = (k === "avg" || k === "las" || k === "p") ? 1 : -1; }
+    renderPlayers();
+  });
+}
+
+function bindSeg(id, key, conv = x => x) {
+  const el = document.getElementById(id);
+  el.querySelectorAll("button").forEach(b => b.onclick = () => {
+    el.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    state[key] = conv(b.dataset.v); renderChart();
+  });
+}
+bindSeg("range", "range", Number);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderChart);
+
+const TABS = ["standings", "trend", "last", "players"];
+function showTab(t) {
+  if (!TABS.includes(t)) t = "standings";
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === t));
+  TABS.forEach(x => (document.getElementById("p-" + x).hidden = x !== t));
+  if (t === "trend") renderChart();
+  try { history.replaceState(null, "", "#" + t); } catch (e) {}
+}
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { showTab(b.dataset.tab); window.scrollTo(0, 0); });
+
+renderStandings();
+showTab(location.hash.slice(1));
+renderLastDay();
+renderPlayers();
+});
+</script>
+</body>
+</html>

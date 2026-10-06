@@ -1,0 +1,6 @@
+# 仲間の名前が入るので公開リポジトリには入れない
+league.json
+docs/
+.firebase/
+__pycache__/
+.claude/
