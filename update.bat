@@ -1,4 +1,5 @@
 @echo off
+chcp 65001 >nul
 rem 手動で最新結果を取り込む。普段は GitHub Actions が毎晩自動でやるので不要。
 rem league.json やデザイン(template.html)を変えたときは、これで Firebase に公開し直す。
 cd /d %~dp0
