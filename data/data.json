@@ -1,6 +1,6 @@
 {
  "season": "current",
- "updated": "2026-10-07 02:41",
+ "updated": "2026-10-09 00:14",
  "teams": [
   {
    "key": "EARTHJETS",
@@ -8,39 +8,19 @@
    "color": "#00897b"
   },
   {
-   "key": "KADOKAWAサクラナイツ",
-   "name": "KADOKAWAサクラナイツ",
-   "color": "#ad1457"
-  },
-  {
-   "key": "U-NEXTPirates",
-   "name": "U-NEXT Pirates",
-   "color": "#1565c0"
-  },
-  {
-   "key": "渋谷ABEMAS",
-   "name": "渋谷ABEMAS",
-   "color": "#f9a825"
-  },
-  {
    "key": "赤坂ドリブンズ",
    "name": "赤坂ドリブンズ",
    "color": "#2e7d32"
   },
   {
-   "key": "セガサミーフェニックス",
-   "name": "セガサミーフェニックス",
-   "color": "#ef6c00"
+   "key": "EX風林火山",
+   "name": "EX風林火山",
+   "color": "#c62828"
   },
   {
-   "key": "BEASTX",
-   "name": "BEAST X",
-   "color": "#37474f"
-  },
-  {
-   "key": "TEAMRAIDEN/雷電",
-   "name": "TEAM RAIDEN / 雷電",
-   "color": "#f06292"
+   "key": "KADOKAWAサクラナイツ",
+   "name": "KADOKAWAサクラナイツ",
+   "color": "#ad1457"
   },
   {
    "key": "KONAMI麻雀格闘倶楽部",
@@ -48,9 +28,29 @@
    "color": "#6a1b9a"
   },
   {
-   "key": "EX風林火山",
-   "name": "EX風林火山",
-   "color": "#c62828"
+   "key": "渋谷ABEMAS",
+   "name": "渋谷ABEMAS",
+   "color": "#f9a825"
+  },
+  {
+   "key": "セガサミーフェニックス",
+   "name": "セガサミーフェニックス",
+   "color": "#ef6c00"
+  },
+  {
+   "key": "TEAMRAIDEN/雷電",
+   "name": "TEAM RAIDEN / 雷電",
+   "color": "#f06292"
+  },
+  {
+   "key": "BEASTX",
+   "name": "BEAST X",
+   "color": "#37474f"
+  },
+  {
+   "key": "U-NEXTPirates",
+   "name": "U-NEXT Pirates",
+   "color": "#1565c0"
   }
  ],
  "players": {
@@ -1509,6 +1509,114 @@
      "player": "三浦智博",
      "rank": 4,
      "pt": -61.6
+    }
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "match": 25,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "内川幸太郎",
+     "rank": 1,
+     "pt": 55.8
+    },
+    {
+     "player": "渡辺太",
+     "rank": 2,
+     "pt": 12.6
+    },
+    {
+     "player": "下石戟",
+     "rank": 3,
+     "pt": -16.6
+    },
+    {
+     "player": "堀慎吾",
+     "rank": 4,
+     "pt": -51.8
+    }
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "match": 25,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "内川幸太郎",
+     "rank": 1,
+     "pt": 59.7
+    },
+    {
+     "player": "尻無濱航",
+     "rank": 2,
+     "pt": 12.2
+    },
+    {
+     "player": "園田賢",
+     "rank": 3,
+     "pt": -20.9
+    },
+    {
+     "player": "東城りお",
+     "rank": 4,
+     "pt": -51.0
+    }
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "match": 26,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "HIRO柴田",
+     "rank": 1,
+     "pt": 50.9
+    },
+    {
+     "player": "松本吉弘",
+     "rank": 2,
+     "pt": 5.8
+    },
+    {
+     "player": "黒沢咲",
+     "rank": 3,
+     "pt": -14.6
+    },
+    {
+     "player": "瑞原明奈",
+     "rank": 4,
+     "pt": -42.1
+    }
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "match": 26,
+   "no": "第2回戦",
+   "results": [
+    {
+     "player": "白鳥翔",
+     "rank": 1,
+     "pt": 52.8
+    },
+    {
+     "player": "朝倉康心",
+     "rank": 2,
+     "pt": -5.3
+    },
+    {
+     "player": "本田朋広",
+     "rank": 2,
+     "pt": -5.3
+    },
+    {
+     "player": "石井一馬",
+     "rank": 4,
+     "pt": -42.2
     }
    ]
   }
