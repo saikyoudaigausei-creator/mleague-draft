@@ -4,3 +4,4 @@ docs/
 .firebase/
 __pycache__/
 .claude/
+logs/
