@@ -64,6 +64,14 @@ body {
 .hero-in { max-width: 920px; margin: 0 auto; }
 .hero h1 { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: .08em; font-style: italic; }
 .hero h1 .dot-g { color: var(--gold); }
+.hero-row { display: flex; align-items: flex-start; gap: 12px; }
+.hero-row > div { flex: 1; min-width: 0; }
+.season {
+  flex: none; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+  background: rgba(255,255,255,.14); color: var(--on-felt);
+  border: 1px solid rgba(255,255,255,.35); border-radius: 999px; padding: 5px 10px;
+}
+.season option { color: #000; }
 .hero .meta { color: var(--on-felt-2); font-size: 13px; margin-top: 4px; }
 .wrap { max-width: 920px; margin: 0 auto; padding: 16px 16px 48px; }
 .tabs {
@@ -161,14 +169,17 @@ th.sortable[aria-sort] { color: var(--text); }
 </style>
 </head>
 <body>
-<div class="hero"><div class="hero-in">
-  <h1 id="title"></h1>
-  <div class="meta" id="meta"></div>
+<div class="hero"><div class="hero-in hero-row">
+  <div>
+    <h1 id="title"></h1>
+    <div class="meta" id="meta"></div>
+  </div>
+  <select class="season" id="season" aria-label="シーズン" hidden></select>
 </div></div>
 <nav class="tabs" role="tablist"><div class="tabs-in">
   <button role="tab" data-tab="standings" aria-selected="true">順位</button>
   <button role="tab" data-tab="trend" aria-selected="false">推移</button>
-  <button role="tab" data-tab="last" aria-selected="false">前回の試合</button>
+  <button role="tab" data-tab="last" aria-selected="false" id="lastTab">前回の試合</button>
   <button role="tab" data-tab="players" aria-selected="false">選手成績</button>
 </div></nav>
 
@@ -206,7 +217,12 @@ const EMBEDDED = /*__DATA__*/null;
 const LEAGUE = /*__LEAGUE__*/null;
 
 // GitHub Actions が毎晩更新する data.json を読みに行き、埋め込みデータより新しければそちらを使う
+// ?s=2025-26 のように過去シーズンを選べる(過去分はページに埋め込み済みの固定データ)
+const PAST = (LEAGUE.past || []).find(p => p.label === new URLSearchParams(location.search).get("s"));
+const LAST = PAST ? "最終日" : "前回";
+
 async function loadData() {
+  if (PAST) return PAST.data;
   if (!LEAGUE.data_url) return EMBEDDED;
   try {
     const ctl = new AbortController();
@@ -252,7 +268,7 @@ const cumsum = a => { let s = 0; return a.map(x => (s += x)); };
 const total = a => a.reduce((x, y) => x + y, 0);
 
 const SV = ["--s1", "--s2", "--s3", "--s4", "--s5", "--s6", "--s7", "--s8"];
-const members = LEAGUE.members.map((m, i) => {
+const members = (PAST ? PAST.members : LEAGUE.members).map((m, i) => {
   const picks = m.players.map(norm);
   const d = picks.reduce((a, p) => a.map((x, j) => x + daily(p)[j]), zero());
   return { ...m, i, picks, daily: d, cum: cumsum(d), sum: total(d), last: d[N - 1] || 0, cvar: SV[i % 8] };
@@ -272,8 +288,22 @@ for (let j = 0; j < N; j++) { const r = rankAt(j); for (const m of members) rank
 const appName = LEAGUE.name || "M.ドラフト";
 document.title = appName;
 document.getElementById("title").innerHTML = esc(appName).replace(".", '<span class="dot-g">.</span>');
-document.getElementById("meta").textContent =
-  `${label(lastDay)} 終了時点 ・ ${N}日 ${DATA.games.length}試合 ・ 更新 ${DATA.updated}`;
+document.getElementById("meta").textContent = PAST
+  ? `${PAST.label} ${PAST.note || ""} 最終結果 ・ ${N}日 ${DATA.games.length}試合`
+  : `${label(lastDay)} 終了時点 ・ ${N}日 ${DATA.games.length}試合 ・ 更新 ${DATA.updated}`;
+if (LEAGUE.past && LEAGUE.past.length) {
+  const sel = document.getElementById("season");
+  sel.hidden = false;
+  sel.innerHTML = [`<option value="">${esc(LEAGUE.season_label || "今シーズン")}</option>`,
+    ...LEAGUE.past.map(p => `<option value="${esc(p.label)}">${esc(p.label)}</option>`)].join("");
+  sel.value = PAST ? PAST.label : "";
+  sel.onchange = () => {
+    const u = new URL(location.href);
+    sel.value ? u.searchParams.set("s", sel.value) : u.searchParams.delete("s");
+    location.href = u.toString();
+  };
+}
+if (PAST) document.getElementById("lastTab").textContent = "最終日の試合";
 
 // ---- 順位カード ----
 function renderStandings() {
@@ -297,9 +327,9 @@ function renderStandings() {
         <div class="rank r${k + 1}">${k + 1}</div>
         <div><span class="st-name">${esc(m.name)}</span>${move}</div>
         <div class="st-pt num"><b class="${cls(m.sum)}">${fmt(m.sum)}</b>
-          <span class="${cls(m.last)}">前回 ${m.last ? sgn(m.last) : "出番なし"}</span></div>
+          <span class="${cls(m.last)}">${LAST} ${m.last ? sgn(m.last) : "出番なし"}</span></div>
       </div>
-      <div class="pick-head"><span>前回</span><span>合計</span></div>
+      <div class="pick-head"><span>${LAST}</span><span>合計</span></div>
       <div class="picks">${picks}</div>
     </div>`;
   }).join("");
@@ -358,7 +388,7 @@ function renderLastDay() {
   const gs = DATA.games.filter(g => g.date === lastDay);
   const matches = [...new Set(gs.map(g => g.match))];
   const tag = g => matches.length > 1 ? `${matches.indexOf(g.match) + 1}組目・` : "";
-  document.getElementById("lastTitle").innerHTML = `前回の試合 <small>${label(lastDay)}</small>`;
+  document.getElementById("lastTitle").innerHTML = `${LAST}の試合 <small>${label(lastDay)}</small>`;
   document.getElementById("games").innerHTML = gs.map(g => `
     <div class="card game"><h3>${tag(g)}${esc(g.no)}</h3>
       ${g.results.map(r => {

@@ -2,7 +2,8 @@
 
 使い方:
     python scrape.py                 # 今シーズン
-    python scrape.py 2025-season     # 過去シーズン(動作確認用)
+    python scrape.py --archive 2025-season 2026-03-27
+        # 過去シーズンを data/season-2025.json に保存(レギュラー最終日までで切る)。一度作れば以後は取得不要
 
 データ源:
     /games/            … 日付・回戦ごとの各選手の得点pt (これを積み上げて日別推移を作る)
@@ -104,8 +105,7 @@ def parse_games(h):
     return games
 
 
-def main():
-    season = sys.argv[1] if len(sys.argv) > 1 else ""
+def collect(season=""):
     games_url = f"https://m-league.jp/games/{season + '/' if season else ''}"
     print("fetch", games_url)
     games = parse_games(fetch(games_url))
@@ -121,12 +121,40 @@ def main():
     players = {}
     for g in games:
         for r in g["results"]:
-            team = stats.get(r["player"], {}).get("team") or badge_team.get(r["badge"], "不明")
+            cur = stats.get(r["player"], {}).get("team")
+            # 過去シーズンは移籍があるので、その年のバッジを優先
+            team = (badge_team.get(r["badge"]) or cur) if season else (cur or badge_team.get(r["badge"]))
+            team = team or "不明"
             players.setdefault(r["player"], {"team": team, "img": r["img"]})
             del r["img"], r["badge"]
+    team_list = [dict(t, color=TEAM_COLORS.get(t["key"], "#888")) for t in teams]
+    return games, players, team_list, stats
 
-    # 検算: 試合結果の積み上げ と stats ページの累計 が一致するか(今シーズンのみ)
-    if not season:
+
+def archive(season, until):
+    games, players, teams, _ = collect(season)
+    games = [g for g in games if g["date"] <= until]
+    used = {r["player"] for g in games for r in g["results"]}
+    data = {
+        "season": season,
+        "updated": f"{until} 終了",
+        "teams": teams,
+        "players": {k: v for k, v in players.items() if k in used},
+        "games": games,
+    }
+    out = ROOT / "data" / f"season-{season[:4]}.json"
+    out.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    print(f"{len(games)}試合 → {out.name}")
+
+
+def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "--archive":
+        return archive(sys.argv[2], sys.argv[3])
+    season = ""
+    games, players, team_list, stats = collect()
+
+    # 検算: 試合結果の積み上げ と stats ページの累計 が一致するか(stats は更新が遅れるので試合直後は不一致になりうる)
+    if True:
         total = {}
         for g in games:
             for r in g["results"]:
@@ -135,9 +163,8 @@ def main():
                if abs(total.get(n, 0) - s["pt"]) > 0.05]
         print("検算:", "OK 全選手一致" if not bad else f"不一致 {bad}")
 
-    team_list = [dict(t, color=TEAM_COLORS.get(t["key"], "#888")) for t in teams]
     data = {
-        "season": season or "current",
+        "season": "current",
         "updated": datetime.now(JST).strftime("%Y-%m-%d %H:%M"),
         "teams": team_list,
         "players": players,
@@ -164,6 +191,14 @@ def main():
     unknown = [p for m in league["members"] for p in m.get("players", []) if norm(p) not in players and norm(p) not in stats]
     if unknown:
         print("⚠ league.json に結果の無い選手名:", unknown)
+
+    # 過去シーズン(固定データ)はページに埋め込む
+    for past in league.get("past", []):
+        pdata = json.loads((ROOT / past["file"]).read_text(encoding="utf-8"))
+        miss = [p for m in past["members"] for p in m["players"] if norm(p) not in pdata["players"]]
+        if miss:
+            print(f"⚠ {past['label']} に結果の無い選手名:", miss)
+        past["data"] = pdata
 
     tpl = (ROOT / "template.html").read_text(encoding="utf-8")
     out = tpl.replace("/*__DATA__*/null", json.dumps(data, ensure_ascii=False)) \
