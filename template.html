@@ -161,6 +161,12 @@ th.sortable[aria-sort] { color: var(--text); }
 .pl { display: flex; align-items: center; gap: 8px; }
 .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; background: var(--c); margin-right: 5px; }
 .note { color: var(--muted); font-size: 12px; }
+.hagi-hero { display: flex; gap: 14px; align-items: center; padding: 14px; margin-bottom: 18px; }
+.hagi-hero img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: top; background: var(--surface-2); flex: none; }
+.hagi-hero .hn { font-weight: 700; font-size: 17px; }
+.hagi-hero .hs { font-size: 13px; color: var(--text-2); }
+.hagi-hero .hs b { color: var(--text); }
+.diff { font-size: 12px; }
 @media (max-width: 560px) {
   .chartbox { height: 260px; }
   .hide-sm { display: none; }
@@ -181,6 +187,7 @@ th.sortable[aria-sort] { color: var(--text); }
   <button role="tab" data-tab="trend" aria-selected="false">推移</button>
   <button role="tab" data-tab="last" aria-selected="false" id="lastTab">前回の試合</button>
   <button role="tab" data-tab="players" aria-selected="false">選手成績</button>
+  <button role="tab" data-tab="hagi" aria-selected="false">ハギーチャンス</button>
 </div></nav>
 
 <div class="wrap">
@@ -207,6 +214,14 @@ th.sortable[aria-sort] { color: var(--text); }
   <section id="p-players" hidden>
     <h2>指名選手の成績 <small>見出しで並べ替え</small></h2>
     <div class="card tablecard"><table id="players"></table></div>
+  </section>
+
+  <section id="p-hagi" hidden>
+    <div class="card hagi-hero" id="hagiHero"></div>
+    <h2>仲間別 <small>指名選手が萩原聖人と同卓した半荘だけを集計</small></h2>
+    <div class="card tablecard"><table id="hagiMembers"></table></div>
+    <h2 style="margin-top:20px">選手別 <small>同卓が多い順</small></h2>
+    <div class="card tablecard"><table id="hagiPlayers"></table></div>
   </section>
 
   <div class="note">データ: M.LEAGUE公式サイトの試合結果を集計。グラフの日付は試合日のみ。</div>
@@ -455,7 +470,61 @@ function bindSeg(id, key, conv = x => x) {
 bindSeg("range", "range", Number);
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderChart);
 
-const TABS = ["standings", "trend", "last", "players"];
+// ---- ハギーチャンス: 萩原聖人と同卓した半荘の成績 ----
+const HAGI = "萩原聖人";
+function renderHagi() {
+  const hg = DATA.games.filter(g => g.results.some(r => r.player === HAGI));
+  const hs = stats[HAGI] || { n: 0, ranks: [0, 0, 0, 0] };
+  const havg = hs.n ? hs.ranks.reduce((a, c, k) => a + c * (k + 1), 0) / hs.n : 0;
+  const hpl = DATA.players[HAGI] || {};
+  document.getElementById("hagiHero").innerHTML = hs.n ? `
+    <img src="${esc(hpl.img || "")}" alt="" onerror="this.style.visibility='hidden'">
+    <div><div class="hn">萩原聖人 <span class="team-s" style="color:var(--muted);font-size:12px">${esc(shortTeam(hpl.team))}</span></div>
+      <div class="hs num">${hs.n}半荘 ・ <b class="${cls(total(daily(HAGI)))}">${fmt(total(daily(HAGI)))}pt</b> ・ 平均${havg.toFixed(2)}着 ・ ラス${hs.ranks[3]}回</div>
+      <div class="hs">同卓した指名選手のpt＝ハギーチャンスの戦果</div></div>`
+    : `<div class="hs">このシーズンは萩原聖人の出場がまだありません</div>`;
+
+  // 選手ごと: 同卓時と非同卓時
+  const ps = {};
+  for (const g of DATA.games) {
+    const withH = g.results.some(r => r.player === HAGI);
+    for (const r of g.results) {
+      if (r.player === HAGI || !ownerOf[r.player]) continue;
+      const x = (ps[r.player] ||= { p: r.player, m: ownerOf[r.player], hn: 0, hpt: 0, htop: 0, on: 0, opt: 0 });
+      if (withH) { x.hn++; x.hpt += r.pt; if (r.rank === 1) x.htop++; }
+      else { x.on++; x.opt += r.pt; }
+    }
+  }
+  const avgS = (pt, n) => n ? fmt(pt / n) : "-";
+  const rowsM = members.map(m => {
+    const xs = m.picks.map(p => ps[p]).filter(Boolean);
+    const sum = k => xs.reduce((a, x) => a + x[k], 0);
+    return { m, hn: sum("hn"), hpt: sum("hpt"), htop: sum("htop"), on: sum("on"), opt: sum("opt") };
+  }).sort((a, b) => b.hpt - a.hpt);
+  document.getElementById("hagiMembers").innerHTML =
+    `<tr><th>仲間</th><th class="n">同卓</th><th class="n">同卓時pt</th><th class="n">1半荘平均</th><th class="n hide-sm">普段の平均</th><th class="n hide-sm">トップ</th></tr>` +
+    rowsM.map(r => `<tr>
+      <td><span class="dot" style="--c:var(${r.m.cvar})"></span>${esc(r.m.name)}</td>
+      <td class="n num">${r.hn}</td>
+      <td class="n num ${cls(r.hpt)}"><b>${r.hn ? fmt(r.hpt) : "-"}</b></td>
+      <td class="n num ${cls(r.hpt)}">${avgS(r.hpt, r.hn)}</td>
+      <td class="n num hide-sm">${avgS(r.opt, r.on)}</td>
+      <td class="n num hide-sm">${r.htop}</td></tr>`).join("");
+
+  const rowsP = Object.values(ps).filter(x => x.hn).sort((a, b) => b.hn - a.hn || b.hpt - a.hpt);
+  document.getElementById("hagiPlayers").innerHTML = rowsP.length
+    ? `<tr><th>選手</th><th>指名</th><th class="n">同卓</th><th class="n">同卓時pt</th><th class="n hide-sm">1半荘平均</th><th class="n hide-sm">普段の平均</th></tr>` +
+      rowsP.map(x => `<tr>
+        <td>${esc(x.p)}</td>
+        <td><span class="dot" style="--c:var(${x.m.cvar})"></span>${esc(x.m.name)}</td>
+        <td class="n num">${x.hn}</td>
+        <td class="n num ${cls(x.hpt)}"><b>${fmt(x.hpt)}</b></td>
+        <td class="n num hide-sm">${avgS(x.hpt, x.hn)}</td>
+        <td class="n num hide-sm">${avgS(x.opt, x.on)}</td></tr>`).join("")
+    : `<tr><td class="note">まだ萩原聖人と同卓した指名選手はいません</td></tr>`;
+}
+
+const TABS = ["standings", "trend", "last", "players", "hagi"];
 function showTab(t) {
   if (!TABS.includes(t)) t = "standings";
   document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === t));
@@ -469,6 +538,7 @@ renderStandings();
 showTab(location.hash.slice(1));
 renderLastDay();
 renderPlayers();
+renderHagi();
 });
 </script>
 </body>
