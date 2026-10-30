@@ -173,6 +173,10 @@ def main():
     # 試合結果が前回と同じなら data.json を書き換えない(GitHub Actions で無駄なコミットを出さないため)
     data_path = ROOT / "data" / "data.json"
     old = json.loads(data_path.read_text(encoding="utf-8")) if data_path.exists() else None
+    # 公式サイトが落ちている/メンテ中だと試合が0件や途中までしか取れない。試合数が減るなら絶対に上書きしない
+    if old and len(games) < len(old.get("games", [])):
+        print(f"⚠ 取得した試合数が減った({len(old['games'])}→{len(games)})。公式サイトの不調とみなして更新しない")
+        sys.exit(1)
     if old and old.get("games") == games and old.get("players") == players:
         data = old
         print("新しい試合結果なし")
