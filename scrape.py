@@ -105,7 +105,50 @@ def parse_games(h):
     return games
 
 
+API = "https://m-league.jp/api/mleague/data?kind="
+
+
+def collect_api():
+    """2026-11 のサイト刷新後: 試合結果は JSON API(/api/mleague/data?kind=games)から取る"""
+    print("fetch", API + "games")
+    src = json.loads(fetch(API + "games"))
+    print("fetch", API + "stats")
+    st = json.loads(fetch(API + "stats"))
+
+    def jst_date(s):
+        return (datetime.fromisoformat(s.replace("Z", "+00:00")).astimezone(JST)).strftime("%Y-%m-%d")
+
+    raw = sorted((g for g in src["games"] if g.get("complete")), key=lambda g: g["gameNo"])
+    games, players, teams, seen = [], {}, [], set()
+    round_no = {}
+    for g in raw:
+        date = jst_date(g["date"])
+        k = (date, g["desk"])
+        round_no[k] = round_no.get(k, 0) + 1
+        results = []
+        for p in sorted(g["players"], key=lambda p: p["rank"]):
+            name, team = norm(p["name"]), norm(p["team"])
+            results.append({"player": name, "rank": p["rank"], "pt": float(p["point"])})
+            players.setdefault(name, {"team": team, "img": "https://m-league.jp" + p["image"] if p.get("image") else ""})
+            if team not in seen:
+                seen.add(team)
+                teams.append({"key": team, "name": p["team"].strip()})
+        games.append({"date": date, "match": int(date.replace("-", "")) * 10 + g["desk"],
+                      "no": f"第{round_no[k]}回戦", "results": results})
+
+    # 検算用: stats の「ポイント」
+    stats = {}
+    for t in st.get("stats", {}).get("teams", []):
+        pts = next((m["values"] for m in t.get("metrics", []) if m["name"] == "ポイント"), [])
+        for i, n in enumerate(t.get("players", [])):
+            stats[norm(n)] = {"team": norm(t["team"]), "pt": float(pts[i]) if i < len(pts) else 0.0}
+    team_list = [dict(t, color=TEAM_COLORS.get(t["key"], "#888")) for t in teams]
+    return games, players, team_list, stats
+
+
 def collect(season=""):
+    if not season:
+        return collect_api()
     games_url = f"https://m-league.jp/games/{season + '/' if season else ''}"
     print("fetch", games_url)
     games = parse_games(fetch(games_url))
