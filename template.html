@@ -212,6 +212,8 @@ th.sortable[aria-sort] { color: var(--text); }
   </section>
 
   <section id="p-players" hidden>
+    <h2>チーム別の着順 <small>指名4人の合計。太字は各項目のベスト(ラスは低い人)</small></h2>
+    <div class="card tablecard" style="margin-bottom:20px"><table id="rankRates"></table></div>
     <h2>指名選手の成績 <small>見出しで並べ替え</small></h2>
     <div class="card tablecard"><table id="players"></table></div>
   </section>
@@ -420,6 +422,31 @@ function renderLastDay() {
 
 // ---- 指名選手テーブル ----
 const sort = { key: "sum", dir: -1 };
+// 仲間ごとの指名チームのトップ率・2位率・3位率・ラス率(平均着順の良い順)
+function renderRankRates() {
+  const rows = members.map(m => {
+    const ranks = [0, 1, 2, 3].map(k => m.picks.reduce((a, p) => a + (stats[p] ? stats[p].ranks[k] : 0), 0));
+    const n = ranks.reduce((a, c) => a + c, 0);
+    return { m, n, rates: ranks.map(c => n ? c / n : 0), avg: n ? ranks.reduce((a, c, k) => a + c * (k + 1), 0) / n : null };
+  }).sort((a, b) => (a.avg ?? 9) - (b.avg ?? 9));
+  const played = rows.filter(r => r.n);
+  // トップ・2位は高いほど、ラスと平均着順は低いほど良い。3位は良し悪しが言えないので強調しない
+  const bestRate = k => k === 3 ? Math.min(...played.map(r => r.rates[3])) : Math.max(...played.map(r => r.rates[k]));
+  const bestAvg = Math.min(...played.map(r => r.avg));
+  const pct = (r, k) => {
+    if (!r.n) return "-";
+    const t = (r.rates[k] * 100).toFixed(1) + "%";
+    return k !== 2 && r.rates[k] === bestRate(k) ? `<b>${t}</b>` : t;
+  };
+  document.getElementById("rankRates").innerHTML =
+    `<tr><th>仲間</th><th class="n hide-sm">半荘</th><th class="n">トップ</th><th class="n">2位</th><th class="n">3位</th><th class="n">ラス</th><th class="n">平均着順</th></tr>` +
+    rows.map(r => `<tr>
+      <td><span class="dot" style="--c:var(${r.m.cvar})"></span>${esc(r.m.name)}</td>
+      <td class="n num hide-sm">${r.n}</td>
+      ${[0, 1, 2, 3].map(k => `<td class="n num">${pct(r, k)}</td>`).join("")}
+      <td class="n num">${r.n ? (r.avg === bestAvg ? `<b>${r.avg.toFixed(2)}</b>` : r.avg.toFixed(2)) : "-"}</td></tr>`).join("");
+}
+
 function renderPlayers() {
   const rows = members.flatMap(m => m.picks.map(p => {
     const s = stats[p] || { n: 0, ranks: [0, 0, 0, 0] };
@@ -537,6 +564,7 @@ document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => { showT
 renderStandings();
 showTab(location.hash.slice(1));
 renderLastDay();
+renderRankRates();
 renderPlayers();
 renderHagi();
 });
