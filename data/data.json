@@ -1,6 +1,6 @@
 {
  "season": "current",
- "updated": "2026-11-06 21:00",
+ "updated": "2026-11-06 21:30",
  "teams": [
   {
    "key": "EARTHJETS",
@@ -3372,6 +3372,33 @@
      "player": "伊達朱里紗",
      "rank": 4,
      "pt": -43.1
+    }
+   ]
+  },
+  {
+   "date": "2026-11-06",
+   "match": 202611061,
+   "no": "第1回戦",
+   "results": [
+    {
+     "player": "仲林圭",
+     "rank": 1,
+     "pt": 59.2
+    },
+    {
+     "player": "永井孝典",
+     "rank": 2,
+     "pt": 8.8
+    },
+    {
+     "player": "HIRO柴田",
+     "rank": 3,
+     "pt": -21.0
+    },
+    {
+     "player": "竹内元太",
+     "rank": 4,
+     "pt": -47.0
     }
    ]
   }
